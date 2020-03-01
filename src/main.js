@@ -6,6 +6,10 @@ import store from './store';
 import { sync } from 'vuex-router-sync';
 import axios from 'axios';
 
+
+window.$ = require('jquery');
+window.JQuery = require('jquery');
+
 Vue.config.productionTip = false;
 
 Vue.prototype.$http = axios;
