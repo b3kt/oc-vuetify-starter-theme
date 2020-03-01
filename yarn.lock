@@ -6641,7 +6641,7 @@ npm-user-validate@~1.0.0:
   resolved "https://registry.yarnpkg.com/npm-user-validate/-/npm-user-validate-1.0.0.tgz#8ceca0f5cea04d4e93519ef72d0557a75122e951"
   integrity sha1-jOyg9c6gTU6TUZ73LQVXp1Ei6VE=
 
-npm@^5.6.0:
+npm@^6.13.4:
   version "5.10.0"
   resolved "https://registry.npm.taobao.org/npm/download/npm-5.10.0.tgz?cache=0&sync_timestamp=1582792516417&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnpm%2Fdownload%2Fnpm-5.10.0.tgz#3bec62312c94a9b0f48f208e00b98bf0304b40db"
   integrity sha1-O+xiMSyUqbD0jyCOALmL8DBLQNs=
