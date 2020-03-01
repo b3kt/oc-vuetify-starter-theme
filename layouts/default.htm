@@ -1,0 +1,45 @@
+[session]
+security = "all"
+==
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% component 'session' %}
+
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="vuetober" content="{{ vuetober | json_encode }}">
+    <title>MyApp</title>
+    <link href="http://localhost:8080/app.js" rel="preload" as="script">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="{{ 'assets/css/custom.css' | theme }}" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+
+    <script>
+        var userid = '{{ user.id}}';
+    </script>
+</head>
+
+<body>
+    <noscript>
+        <strong>We're sorry but /home/bekt/Project/majalah/october/themes/vuetify-starter doesn't work properly without
+            JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    {% page %}
+
+    {{ vuetober | json_encode}}
+
+    <script type="text/javascript" src="http://localhost:8080/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    {% framework extras %}
+    {% scripts %}
+    <script>
+    </script>
+</body>
+
+</html>

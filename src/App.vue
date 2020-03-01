@@ -4,6 +4,8 @@
     <v-content>
       <router-view/>
     </v-content>
+    <Footer />
+
     <v-layout>
       <v-dialog v-model="dialog" persistent width="800" >
         <v-card>
@@ -36,6 +38,7 @@
 
 <script>
 import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
   name: 'App',
@@ -43,7 +46,7 @@ export default {
     dialog: false,
   }),
   components: {
-    Header
+    Header, Footer
   }
 };
 </script>

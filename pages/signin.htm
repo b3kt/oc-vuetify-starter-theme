@@ -1,0 +1,14 @@
+title = "signin"
+url = "/signin"
+layout = "default"
+is_hidden = 0
+
+[account]
+paramCode = "code"
+forceSecure = 0
+
+[session]
+security = "all"
+==
+{% component 'session' %}
+{% component 'account' %}

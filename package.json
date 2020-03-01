@@ -1,9 +1,9 @@
 {
   "name": "my-training",
-  "description": "For Learning, Inited structured by ",
-  "author": "Pongsametrey Sok <metreysk@gmail.com>",
   "version": "0.1.0",
   "private": true,
+  "description": "For Learning, Inited structured by ",
+  "author": "Pongsametrey Sok <metreysk@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -14,6 +14,7 @@
     "core-js": "^2.6.5",
     "es6-promise": "^4.2.8",
     "npm": "^5.6.0",
+    "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.7",
     "vuetify": "^2.0.0",
@@ -21,8 +22,10 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
+    "@mdi/font": "^4.9.95",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
+    "@vue/cli-plugin-pwa": "~4.2.0",
     "@vue/cli-service": "^3.9.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
@@ -30,6 +33,7 @@
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-vuetify": "^0.6.1",
+    "vue-cli-plugin-vuetober": "~3.0.0",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2"
   },

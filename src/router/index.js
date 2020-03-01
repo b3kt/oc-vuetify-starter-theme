@@ -4,18 +4,25 @@ import HomePage from '@/pages/HomePage';
 import CatalogPage from '@/pages/CatalogPage';
 import LoginPage from '@/pages/LoginPage';
 import RegisterPage from '@/pages/RegisterPage';
-// import Hello from '@/components/HelloWorld';
+
+import DashboardPage from '@/pages/DashboardPage';
+import ForgotPasswordPage from '@/pages/ForgotPasswordPage';
+import ResetPasswordPage from '@/pages/ResetPasswordPage';
+import SecretsPage from '@/pages/SecretsPage';
+
 import ViewHello from '@/components/ViewWorld';
+
+import store from '@/store/index.js'
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   linkActiveClass: 'active',
   mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Hello',
+      name: 'Home',
       component: HomePage
     },
     {
@@ -37,6 +44,54 @@ export default new Router({
       path: '/view',
       name: 'ViewHello',
       component: ViewHello
-    }
+    },
+    {
+      path: '/forgot-password',
+      name: 'ForgotPassword',
+      component: ForgotPasswordPage
+    },
+    {
+      path: '/password/reset/:code',
+      name: 'ResetPassword',
+      component: ResetPasswordPage,
+      props: true
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: DashboardPage,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/secrets',
+      name: 'SecretsPage',
+      component: SecretsPage,
+      meta: { requiresAuth: true }
+    },
+
   ]
 });
+
+
+// Set up global navigation guard
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!store.getters.isAuthenticated) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
+
+  // Clear form errors on every page change
+  store.commit('clearFormErrors')
+});
+
+export default router;

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-0">
+  <v-container class="pa-0 full-width">
     <SystemBar />
     <!--AppBar /-->
   </v-container>
@@ -10,7 +10,8 @@ import SystemBar from '@/components/SystemBar';
 // import AppBar from '@/components/AppBar';
 
 export default {
-  name: 'header',
+  id: 'c-header',
+  name: 'c-header',
   data: () => ({
     form: {
       name: '',
