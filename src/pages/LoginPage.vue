@@ -4,7 +4,7 @@
       <v-card width="480" class="mx-auto mt-12 pt-12 pb-6" flat>
         <v-card-title primary-title class="text-center">
           <div class="mx-auto">
-            Welcome
+            Welcome {{isAuthenticated}}
           </div>
         </v-card-title>
         <v-divider></v-divider>
@@ -45,6 +45,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -54,6 +55,15 @@ export default {
         password: ''
       }
     }
+  },
+  mounted () {
+    this.$store.dispatch('tryAutoLogin')
+    if(this.$store.getters.isAuthenticated){
+      //this.$router.push('/')  
+    }
+
+    
+
   },
   methods: {
     forgot () {
@@ -77,7 +87,8 @@ export default {
   computed: {
     ...mapGetters([
       'hasValidationError',
-      'getValidationError'
+      'getValidationError',
+      'isAuthenticated'
     ])
   }
 }

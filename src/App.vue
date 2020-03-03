@@ -5,7 +5,6 @@
       <router-view/>
     </v-content>
     <Footer />
-
     <v-layout>
       <v-dialog v-model="dialog" persistent width="800" >
         <v-card>
@@ -46,7 +45,10 @@ export default {
     dialog: false,
   }),
   components: {
-    Header, Footer
+    Header, Footer,
+    // 'test':  () => import('@/components/Header.vue')
   }
 };
 </script>
+
+<style type="text/cs" src="@/assets/css/custom.css" />

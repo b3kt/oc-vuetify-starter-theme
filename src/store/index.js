@@ -42,6 +42,11 @@ export default new Vuex.Store({
     },
     clearUserName (state) {
       state.userName = null
+    },
+    clearAuthData (state) {
+      state.jsonWebToken = null
+      state.userName = null
+      state.userEmail = null
     }
   },
   actions: {
@@ -66,12 +71,14 @@ export default new Vuex.Store({
           dispatch('getUser')
           const now = new Date()
           const expirationDate = new Date(now.getTime() + (response.data.expires_in * 1000))
-          localStorage.setItem('auth_token', response.data.access_token)
+          localStorage.setItem('auth_token', response.data.token)
           localStorage.setItem('auth_expiration', expirationDate)
-
           commit('setAuthCredentials', {
-            token: response.data.access_token
+            token: response.data.token
           })
+          commit('setUserName', response.data.user.username);
+          commit('setUserEmail', response.data.user.email);
+
           dispatch('setLogoutTimer', response.data.expires_in)
 
           router.push({ name: 'Dashboard' })
@@ -111,14 +118,15 @@ export default new Vuex.Store({
         password_confirmation: registration.password_confirmation
       }).then(response => {
         const now = new Date()
-        const expirationDate = new Date(now.getTime() + (response.data.expires_in * 1000))
+        // const expirationDate = new Date(now.getTime() + (response.data.expires_in * 1000))
+        const expirationDate = new Date(now.getTime() + (3600 * 1000))
         localStorage.setItem('auth_token', response.data.access_token)
         localStorage.setItem('auth_expiration', expirationDate)
 
         commit('setAuthCredentials', {
           token: response.data.access_token
         })
-        dispatch('setLogoutTimer', response.data.expires_in)
+        dispatch('setLogoutTimer', 3600)
         dispatch('getUser')
         bus.$emit('flash', 'Registration complete; you have been signed in.', 'success')
 
@@ -128,8 +136,8 @@ export default new Vuex.Store({
     getUser ({ commit }) {
       axios.get('api/auth/me')
         .then((response) => {
-          commit('setUserEmail', response.data.email)
-          commit('setUserName', response.data.name)
+          commit('setUserEmail', response.data.user.email)
+          commit('setUserName', response.data.user.username)
         })
         .catch(() => {
           bus.$emit('flash', 'I could not retrieve your user profile from the server.', 'danger')

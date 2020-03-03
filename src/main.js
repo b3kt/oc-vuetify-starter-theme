@@ -5,10 +5,12 @@ import router from './router';
 import store from './store';
 import { sync } from 'vuex-router-sync';
 import axios from 'axios';
+import jquery from './assets/js/jquery.min.js'
 import './registerServiceWorker'
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
+Vue.prototype.$jquery = jquery;
 
 sync(store, router);
 

@@ -1,14 +1,15 @@
-title = "signin"
-url = "/signin"
+title = "Dynamic"
+url = "/dynamic"
 layout = "default"
 is_hidden = 0
+
+[session]
+security = "all"
 
 [account]
 paramCode = "code"
 forceSecure = 0
-
-[session]
-security = "all"
 ==
-{% component 'session' %}
+{{user}}
+
 {% component 'account' %}

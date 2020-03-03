@@ -1,5 +1,9 @@
 [session]
 security = "all"
+
+[account]
+paramCode = "code"
+forceSecure = 0
 ==
 <!DOCTYPE html>
 <html>
@@ -14,10 +18,9 @@ security = "all"
     <title>MyApp</title>
     <link href="http://localhost:8080/app.js" rel="preload" as="script">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-    <link href="{{ 'assets/css/custom.css' | theme }}" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="{{ 'assets/css/custom.css' | theme }}" rel="stylesheet">
 
     <script>
         var userid = '{{ user.id}}';
@@ -30,12 +33,11 @@ security = "all"
             JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     {% page %}
+    ------------------{{ user }}-------------
 
-    {{ vuetober | json_encode}}
 
     <script type="text/javascript" src="http://localhost:8080/app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     {% framework extras %}
     {% scripts %}
     <script>

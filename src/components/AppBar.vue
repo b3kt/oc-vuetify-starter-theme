@@ -1,13 +1,7 @@
 <template>
-  <v-app-bar
-      absolute
-      color="white"
-      elevate-on-scroll
-      scroll-target="#scrolling-techniques-7"
-    >
+  <v-app-bar absolute color="white" elevate-on-scroll scroll-target="#scrolling-techniques-7">
     <v-container style="max-width:1080px">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
       <v-toolbar-title>Title</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -28,8 +22,18 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
   data: () => ({}),
-  methods: {},
+  methods: {
+    logout() {
+      this.clearFormErrors();
+      this.$store.dispatch("logout");
+    },
+    ...mapMutations(["clearFormErrors"])
+  },
+  computed: {
+    ...mapGetters(["hasValidationError", "getValidationError"])
+  }
 };
 </script>
