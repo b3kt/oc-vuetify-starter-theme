@@ -25,13 +25,13 @@
           </v-btn>
         </v-toolbar>
         <v-divider></v-divider>
-        <v-card-text v-if="true" style="height: auto;">
+        <v-card-text v-if="true" style="height: auto;" class="elevation-0" >
             <AccountTabs />
         </v-card-text>
       </v-card>
     </v-card>
 
-    <v-container style="max-width:1080px;" class="mx-auto pa-0">
+    <!-- <v-container style="max-width:1080px;" class="mx-auto pa-0">
       <div>
         <h1>Dashboard</h1>
         <p class="text-center"></p>
@@ -42,7 +42,7 @@
           >Test Alert</a>
         </p>
       </div>
-    </v-container>
+    </v-container> -->
   </v-container>
 </template>
 

@@ -1,0 +1,54 @@
+{
+    "linkActiveClass": "active",
+    "mode": "history",
+    "routes": [
+      {
+        "path": "/",
+        "name": "Home",
+        "component": "HomePage"
+      },
+      {
+        "path": "/catalog",
+        "name": "Catalog",
+        "component": "CatalogPage"
+      },
+      {
+        "path": "/login",
+        "name": "Login",
+        "component": "LoginPage"
+      },
+      {
+        "path": "/register",
+        "name": "Register",
+        "component": "RegisterPage"
+      },
+      {
+        "path": "/view",
+        "name": "ViewHello",
+        "component": "ViewHello"
+      },
+      {
+        "path": "/forgot-password",
+        "name": "ForgotPassword",
+        "component": "ForgotPasswordPage"
+      },
+      {
+        "path": "/password/reset/:code",
+        "name": "ResetPassword",
+        "component": "ResetPasswordPage",
+        "props": true
+      },
+      {
+        "path": "/dashboard",
+        "name": "Dashboard",
+        "component": "DashboardPage",
+        "meta": { "requiresAuth": true }
+      },
+      {
+        "path": "/secrets",
+        "name": "SecretsPage",
+        "component": "SecretsPage",
+        "meta": { "requiresAuth": true }
+      }
+    ]
+  }

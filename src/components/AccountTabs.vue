@@ -1,9 +1,11 @@
 <template>
   <v-card flat>
-    <v-tabs vertical>
-      <v-tab v-for="tab in tabs" :key="tab.id">
-        <v-icon left>mdi-account</v-icon>
+    <v-tabs vertical  >
+      <v-tab v-for="tab in tabs" :key="tab.id" >
+        <!-- <v-icon left>mdi-account</v-icon> -->
+        <span  class="text-lg-start">
         {{ tab.title }}
+        </span>
       </v-tab>
 
       <v-tab-item>
@@ -26,7 +28,8 @@ export default {
     return {
       tabs: [
         { id: "profile", title: "Profile" },
-        { id: "orders", title: "Orders" }
+        { id: "orders", title: "Orders" },
+        { id: "collections", title: "Collections" }
       ],
       slides: ["First"]
     };

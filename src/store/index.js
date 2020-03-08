@@ -3,6 +3,7 @@ import bus from '@/services/jwt/bus'
 import Vuex from 'vuex'
 import axios from '@/services/jwt/axios'
 import router from '@/router'
+import Constant from '@/constant'
 
 Vue.use(Vuex)
 
@@ -66,7 +67,9 @@ export default new Vuex.Store({
       }, expirationTime * 1000)
     },
     login ({ commit, dispatch }, credentials) {
-      axios.post('api/auth/login', { login: credentials.email, password: credentials.password })
+      axios.post(Constant.API_LOGIN_URL, { login: credentials.email, password: credentials.password },{
+        headers: {'X-OCTOBER-REQUEST-HANDLER':'onRegister'}
+      })
         .then((response) => {
           dispatch('getUser')
           const now = new Date()
@@ -111,7 +114,7 @@ export default new Vuex.Store({
       router.push({ name: 'Login' })
     },
     register ({ commit, dispatch }, registration) {
-      axios.post('api/auth/register', {
+      axios.post(Constant.API_REGISTER_URL, {
         username: registration.username,
         email: registration.email,
         password: registration.password,
@@ -134,7 +137,7 @@ export default new Vuex.Store({
       }).catch(() => {}) // See axios config for basic error handling
     },
     getUser ({ commit }) {
-      axios.get('api/auth/me')
+      axios.get(Constant.API_GETME_URL)
         .then((response) => {
           commit('setUserEmail', response.data.user.email)
           commit('setUserName', response.data.user.username)

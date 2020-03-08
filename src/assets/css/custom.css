@@ -1,2 +1,3 @@
+.hyperlink{text-decoration: none;}
 .text-white.hyperlink{ text-decoration: none; color: rgba(255, 255, 255, 0.7);}
 .container.full-width{ max-width: 100%;} 

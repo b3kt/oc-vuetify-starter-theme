@@ -11,6 +11,7 @@ import ResetPasswordPage from '@/pages/ResetPasswordPage';
 import SecretsPage from '@/pages/SecretsPage';
 
 import ViewHello from '@/components/ViewWorld';
+import ProductDetailPage from '@/pages/ProductDetailPage';
 
 import store from '@/store/index.js'
 
@@ -44,6 +45,12 @@ const router = new Router({
       path: '/view',
       name: 'ViewHello',
       component: ViewHello
+    },
+    {
+      path: '/detail/:id',
+      name: 'ProductDetailPage',
+      component: ProductDetailPage,
+      props: true
     },
     {
       path: '/forgot-password',
