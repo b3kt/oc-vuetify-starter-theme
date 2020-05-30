@@ -1,8 +1,5 @@
-# Vuetify-Starter
-
+# Vuetify for OctoberCMS theme
 Learning or Starter Project with Vuex, Vue-router with a simple example there.
-
-You can find on-going update at: https://github.com/osify/vuetify-starter
 
 ## Project setup
 ```
@@ -31,3 +28,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### References
+[Vuetify Starter](https://github.com/osify/vuetify-starter)
