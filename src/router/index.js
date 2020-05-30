@@ -1,16 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import HomePage from '@/pages/HomePage';
-import CatalogPage from '@/pages/CatalogPage';
 import LoginPage from '@/pages/LoginPage';
 import RegisterPage from '@/pages/RegisterPage';
 
 import DashboardPage from '@/pages/DashboardPage';
 import ForgotPasswordPage from '@/pages/ForgotPasswordPage';
 import ResetPasswordPage from '@/pages/ResetPasswordPage';
-import SecretsPage from '@/pages/SecretsPage';
-
-import ViewHello from '@/components/ViewWorld';
 
 import store from '@/store/index.js'
 
@@ -26,11 +22,6 @@ const router = new Router({
       component: HomePage
     },
     {
-      path: '/catalog',
-      name: 'Catalog',
-      component: CatalogPage
-    },
-    {
       path: '/login',
       name: 'Login',
       component: LoginPage
@@ -39,11 +30,6 @@ const router = new Router({
       path: '/register',
       name: 'Register',
       component: RegisterPage
-    },
-    {
-      path: '/view',
-      name: 'ViewHello',
-      component: ViewHello
     },
     {
       path: '/forgot-password',
@@ -61,14 +47,7 @@ const router = new Router({
       name: 'Dashboard',
       component: DashboardPage,
       meta: { requiresAuth: true }
-    },
-    {
-      path: '/secrets',
-      name: 'SecretsPage',
-      component: SecretsPage,
-      meta: { requiresAuth: true }
-    },
-
+    }
   ]
 });
 

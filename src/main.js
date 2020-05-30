@@ -5,12 +5,24 @@ import router from './router';
 import store from './store';
 import { sync } from 'vuex-router-sync';
 import axios from 'axios';
-import jquery from './assets/js/jquery.min.js'
 import './registerServiceWorker'
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
-Vue.prototype.$jquery = jquery;
+
+import moment from 'moment'
+
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY')
+  }
+})
+
+Vue.filter('titlecase', function(value) {
+  if (value) {
+    return value.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase());
+  }
+})
 
 sync(store, router);
 

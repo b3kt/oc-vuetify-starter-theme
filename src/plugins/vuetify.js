@@ -1,48 +1,95 @@
+import '@fortawesome/fontawesome-free/css/all.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import Vuetify, { VSnackbar } from 'vuetify/lib';
+import VueI18n from 'vue-i18n'
+
 
 import {
   VApp,
   VBtn,
   VBtnToggle,
-  VCard,
   VCheckbox,
   VDivider,
   VGrid,
   VIcon,
-  VList,
+  VList, VListTile, VListTileAvatar,
   VProgressLinear,
-  VTextField
+  VTextField,
+  VMenu,
+  VCard, VCardMedia, VCardText, VCardTitle,
+  VDatePicker
 } from 'vuetify';
+
 
 Vue.use(Vuetify, {
   components: {
     VApp,
     VBtn,
     VBtnToggle,
-    VCard,
     VCheckbox,
     VDivider,
     VGrid,
     VIcon,
-    VList,
+    VList,VListTile, VListTileAvatar,
     VProgressLinear,
-    VTextField
-  },
-  theme: {
-    // primary: manifestJSON.theme_color
-    primary: '#673ab7',
-    secondary: '#3f51b5',
-    accent: '#03a9f4',
-    error: '#f44336',
-    warning: '#ffc107',
-    info: '#4caf50',
-    success: '#9c27b0'      
+    VTextField,
+    VMenu,
+    VCard, VCardMedia, VCardText, VCardTitle,
+    VSnackbar,
+    VDatePicker
   }
 });
 
+import VuetifyToast from 'vuetify-toast-snackbar'
+Vue.use(VuetifyToast, {
+	x: 'right', // default
+	y: 'top', // default
+	color: 'info', // default
+	iconColor: '', // default
+	classes: [
+		'body-2'
+	],
+	timeout: 3000, // default
+	dismissable: true, // default
+	multiLine: false, // default
+	vertical: false, // default
+	queueable: false, // default
+	showClose: false, // default
+	closeText: '', // default
+	closeIcon: 'close', // default
+	closeColor: '', // default
+	slot: [], //default
+	shorts: {
+		custom: {
+			color: 'purple'
+		}
+	},
+	property: '$toast' // default
+})
+
+Vue.use(VueI18n);
+
+import en from '@/i18n/locales/en'
+
 export default new Vuetify({
   icons: {
-    iconfont: 'mdi',
+    iconfont: 'md',
+  },
+  theme: {
+    themes: {
+      light: {
+        primary: '#d53b30',
+        secondary: '#faae23',
+        accent: '#8c9eff',
+        error: '#b71c1c',
+      },
+    },
+  },
+  lang: {
+    locales: { en },
+    current: 'en',
   },
 });
+
+

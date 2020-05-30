@@ -3,6 +3,14 @@ url = "/:all?*"
 layout = "default"
 is_hidden = 0
 ==
+function onStart()
+{
+    $this['vuetober'] = [
+        'env' => app()->env,
+        'token' => Session::token(),
+    ];
+}
+==
 <div id="app" class="page home">
     <v-skeleton-loader
       class="mx-auto"

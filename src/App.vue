@@ -1,37 +1,10 @@
 <template>
   <v-app>
-    <Header />
+    <Header :showMenu="$route.meta.showMenu" />
     <v-content>
       <router-view/>
     </v-content>
-    <Footer />
-    <v-layout>
-      <v-dialog v-model="dialog" persistent width="800" >
-        <v-card>
-          <v-card-title class="headline grey lighten-2" primary-title>
-            Training Info
-          </v-card-title>
-
-          <v-card-text>
-            <p>This is a special training by MT!</p>
-            <p>If you want to join, please contact to MT.</p>
-          </v-card-text>
-
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              text
-              @click="dialog = false"
-            >
-              I accept
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-layout>
+    <Footer :showMenu="$route.meta.showMenu" />
   </v-app>
 </template>
 
@@ -45,10 +18,27 @@ export default {
     dialog: false,
   }),
   components: {
-    Header, Footer,
-    // 'test':  () => import('@/components/Header.vue')
-  }
+    Header, Footer
+  },
+  mounted(){}
 };
 </script>
 
 <style type="text/cs" src="@/assets/css/custom.css" />
+
+<style>
+.no-span {
+    display: table;
+    white-space: nowrap;
+}
+.no-span:before, .no-span:after {
+    border-top: 6px solid #faae23;
+    content: '';
+    display: table-cell;
+    position: relative;
+    top: 0.7em;
+    width: 45%;
+}
+.no-span:before { right: 1.5%; }
+.no-span:after { left: 1.5%; }
+</style>

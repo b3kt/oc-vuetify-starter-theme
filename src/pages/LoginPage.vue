@@ -1,95 +1,119 @@
 <template>
   <v-container grid-list-xs>
+    <v-form @submit.prevent="submit">
+      
     <v-layout row wrap>
+          
       <v-card width="480" class="mx-auto mt-12 pt-12 pb-6" flat>
         <v-card-title primary-title class="text-center">
-          <div class="mx-auto">
-            Welcome {{isAuthenticated}}
-          </div>
+          <div class="mx-auto display-2 font-weight-black">Login</div>
         </v-card-title>
-        <v-divider></v-divider>
-        <v-card-text>
-          <v-form>
-            <v-text-field name="email" label="Email" 
-                 v-model="credentials.email"
-                id="email"></v-text-field>
-            <v-text-field
-              name="name"
-              label="Enter your password"
-              hint="At least 8 characters"
-              min="8"
-              :append-icon="value ? 'mdi-lock' : 'mdi-lock-open'"
-              :append-icon-cb="() => (value = !value)"
-              :rules="[() => ('The email and password you entered don\'t match')]"
-              :type="value ? 'password' : 'text'"
-              @keydown.enter.prevent="login"
-              v-model="credentials.password"
-            ></v-text-field>
-          </v-form>
+        <v-card-text class="text-center font-weight-light">
+          Not Registered ?
+          <router-link :to="{name:'Register'}" class="hyperlink">Register</router-link>
         </v-card-text>
         <v-divider></v-divider>
-        <v-card-actions>
-          <v-btn color="primary" large block dark
-             @click.prevent="login"
-            >Login</v-btn>
+        <v-card-text>
+            <v-text-field
+              name="email"
+              label="Email"
+              v-model="credentials.email"
+              :rules="[rules.required, rules.email]"
+              id="email"
+              append-icon="mdi-email"
+              flat
+              outlined
+              autocomplete="username"
+            ></v-text-field>
+            <v-text-field
+              autocomplete="current-password"
+              name="password"
+              label="Password"
+              :rules="[rules.required]"
+              type="password"
+              append-icon="mdi-lock"
+              @keydown.enter.prevent="login"
+              v-model="credentials.password"
+              flat
+              outlined
+            ></v-text-field>
+        </v-card-text>
+        <v-card-actions class="mx-2">
+          <v-btn color="primary" x-large block dark type="submit">Login</v-btn>
         </v-card-actions>
-        <v-card-actions>
-          <v-btn text small block 
-            @click.prevent="forgot"
-          >Forgot Password?</v-btn>
-        </v-card-actions>
+        <v-card-text class="text-center font-weight-light">
+          Forgot your password? 
+          <router-link :to="{name:'ForgotPassword'}" class="hyperlink">Reset password</router-link>
+        </v-card-text>
       </v-card>
     </v-layout>
+    </v-form>
   </v-container>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from "vuex"
 
 export default {
-  data () {
+  data() {
     return {
       value: false,
       credentials: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
+      },
+      rules: {
+        required: value => !!value || "This field is required.",
+        min: v => v.length >= 8 || "Min 8 characters",
+        email: value => {
+            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            return pattern.test(value) || 'Invalid email format.'
+          },
       }
-    }
+    };
   },
-  mounted () {
-    this.$store.dispatch('tryAutoLogin')
-    if(this.$store.getters.isAuthenticated){
-      //this.$router.push('/')  
+  mounted() {
+    this.$store.dispatch("tryAutoLogin");
+    if (this.$store.getters.isAuthenticated) {
+      this.$router.push({ name: "Home" });
     }
-
-    
-
   },
   methods: {
-    forgot () {
-      this.$router.push({ name: 'ForgotPassword' })
-    },
-    login () {
-      this.clearFormErrors()
-      this.$store.dispatch('login', this.credentials)
-    },
-    resetForm () {
-      this.credentials = {
-        email: '',
-        password: ''
+    submit() {
+      if(this.credentials.email !== '' && this.credentials.password !== ''){
+        this.login()
       }
-      this.clearFormErrors()
     },
-    ...mapMutations([
-      'clearFormErrors'
-    ])
+    login() {
+      this.clearFormErrors();
+      this.$store.dispatch("login", this.credentials);
+    },
+    resetForm() {
+      this.credentials = {
+        email: "",
+        password: ""
+      };
+      this.clearFormErrors();
+    },
+    ...mapMutations(["clearFormErrors"])
+  },
+  watch: {
+    '$store.state.formErrors': function() {
+      if(this.$store.state.formErrors.message !== undefined){
+        this.$toast(this.$store.state.formErrors.message,  {
+          color: 'red',
+          dismissable: true,
+          queueable: true
+        })
+      }
+    }
   },
   computed: {
     ...mapGetters([
-      'hasValidationError',
-      'getValidationError',
-      'isAuthenticated'
+      "hasValidationError",
+      "getValidationError",
+      "isAuthenticated"
     ])
   }
-}
+};
 </script>

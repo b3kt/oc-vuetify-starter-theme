@@ -1,75 +1,78 @@
 <template>
-  <v-container class="pa-0 full-width">
-    <v-card flat tile class="mb-6">
-      <v-toolbar color="primary" dark extended flat height="120">
-        <div style="width:1080px;" class="mx-auto">
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        </div>
+  <v-container id="inspire" full-width> 
+    <v-app-bar app flat clipped-right color="white" light class="bottomline elevation-1">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title>Dashboard</v-toolbar-title>
+      <v-spacer />
+      <v-toolbar color="transparent" flat>
+        <v-btn class="align-right" text outlined :to="{ name:'Home'}">
+          <v-icon>fa fa-logout</v-icon>  
+          Home
+        </v-btn>  
+        <v-btn class="align-right" text outlined @click.stop="logout()">
+          <v-icon>fa fa-logout</v-icon>  
+          Logout
+        </v-btn>  
       </v-toolbar>
-      <v-card class="mx-auto pa-0" max-width="1080" style="margin-top: -64px;">
-        <v-toolbar flat>
-          <v-toolbar-title class="grey--text">
-              Hi {{ userName }}.
-          </v-toolbar-title>
+      <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight" />
+    </v-app-bar>
 
-          <v-spacer></v-spacer>
+    <v-navigation-drawer v-model="drawer" app left color="secondary  darken-3">
+      <v-list dense nav color="secondary darken-3" dark>
+        <v-list-item v-for="item in items" :key="item.title" link :to="item.url">
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
-          <v-btn icon>
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-apps</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-divider></v-divider>
-        <v-card-text v-if="true" style="height: auto;">
-            <AccountTabs />
-        </v-card-text>
-      </v-card>
-    </v-card>
+    <v-navigation-drawer v-model="left" fixed temporary />
 
-    <v-container style="max-width:1080px;" class="mx-auto pa-0">
-      <div>
-        <h1>Dashboard</h1>
-        <p class="text-center"></p>
-        <p class="w-full text-center my-8">
-          <a
-            class="bg-grey-dark hover:bg-grey-darker text-white font-bold py-2 px-4 m-2 rounded cursor-pointer"
-            @click.prevent="alert('This is a test message.', 'success')"
-          >Test Alert</a>
-        </p>
-      </div>
-    </v-container>
+    <v-content class="pa-0">
+      <router-view></router-view>
+    </v-content>
+
+    <v-navigation-drawer v-model="right" fixed right temporary />
   </v-container>
 </template>
 
 <script>
-import bus from "@/services/jwt/bus";
-import { mapGetters } from "vuex";
-import AccountTabs from '@/components/AccountTabs';
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
-  data() {
-    return {};
+  props: {
+    source: String
   },
-  components: {
-      AccountTabs
-  },
-  mounted () {
-    this.$store.dispatch("tryAutoLogin");
-    if(!this.$store.getters.isAuthenticated){
-      this.$router.push('login')  
-    }
+
+  data: () => ({
+    items: [
+      { title: "Settings", icon: "fa fa-sliders-h", url: "/dashboard/setting" },
+      { title: "Help", icon: "fa fa-question-circle", url: "/dashboard/help" }
+    ],
+    drawer: null,
+    drawerRight: null,
+    right: false,
+    left: false
+  }),
+  methods: {
+    logoutConfirm() {},
+    logout() {
+      this.dialog = false; 
+      this.clearFormErrors();
+      this.$store.dispatch("logout");
+    },
+    ...mapMutations(["clearFormErrors"])
   },
   computed: {
-    ...mapGetters(["userName","isAuthenticated"])
-  },
-  methods: {
-    alert(message, level) {
-      bus.$emit("flash", message, level);
-    }
+    ...mapGetters([
+      "hasValidationError",
+      "getValidationError",
+      "isAuthenticated"
+    ])
   }
 };
 </script>

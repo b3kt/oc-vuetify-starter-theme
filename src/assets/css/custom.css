@@ -1,2 +1,6 @@
+.hyperlink{text-decoration: none;}
 .text-white.hyperlink{ text-decoration: none; color: rgba(255, 255, 255, 0.7);}
-.container.full-width{ max-width: 100%;} 
+.full-width{ max-width: 100%;} 
+.title-case{ text-transform: capitalize;}
+.bottomline{ border-bottom: 6px solid orange; }
+.upperline{ border-top: 6px solid orange; }
