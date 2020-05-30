@@ -4,8 +4,7 @@ import axios from 'axios'
 import bus from '@/services/jwt/bus'
 
 const customized = axios.create({
-  //baseURL: process.env.VUE_APP_API_URL,
-  baseURL: 'http://localhost',
+  baseURL: process.env.VUE_APP_API_URL,
   headers: {'X-Requested-With': 'XMLHttpRequest'}
 })
 
