@@ -30,5 +30,5 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### References
-[Vuetify Starter](https://github.com/osify/vuetify-starter)
-[Vuetober](https://github.com/scottbedard/vuetober)
+* [Vuetify Starter](https://github.com/osify/vuetify-starter)
+* [Vuetober](https://github.com/scottbedard/vuetober)
